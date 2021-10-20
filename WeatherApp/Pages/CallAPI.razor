@@ -1,0 +1,39 @@
+﻿@page "/CallAPI"
+
+<form @onsubmit="CallAPIMethod">
+    <label>City name/Postcode:</label><br>
+    <input type="text" @bind="CityName"> <button class="btn btn-primary" @onclick="CallAPIMethod">Search</button>
+
+</form>
+
+<br />
+
+@if (CityLocationInfo.Location != null)
+{
+
+    <h4>Location Information:</h4>
+    <p>Name: @CityLocationInfo.Location.Name</p>
+    <p>Region: @CityLocationInfo.Location.Region</p>
+    <p>Country: @CityLocationInfo.Location.Country</p>
+    <p>Latitude: @CityLocationInfo.Location.Lat</p>
+    <p>Longitude: @CityLocationInfo.Location.Lon</p>
+    <p>TimeZone: @CityLocationInfo.Location.Tz_Id</p>
+    <p>CurrentTime: @CityLocationInfo.Location.LocalTime</p>
+
+    <h4>Three-hour Forecast</h4>
+
+    foreach (var item in CityForecastInfo.Forecast.ForecastDay)
+    {
+        foreach (var hour in item.Hour)
+        {
+            @if (DateTime.Parse(@hour.Time) > DateTime.Parse(@CityLocationInfo.Location.LocalTime) && DateTime.Parse(@hour.Time) < DateTime.Parse(@CityLocationInfo.Location.LocalTime).AddHours(3))
+            {
+                <p>@hour.Time : @hour.Condition.Text</p>
+            }
+        }
+    }
+}
+
+
+
+
