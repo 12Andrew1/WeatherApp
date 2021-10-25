@@ -20,15 +20,15 @@
     <p>TimeZone: @CityLocationInfo.Location.Tz_Id</p>
     <p>CurrentTime: @CityLocationInfo.Location.LocalTime</p>
 
-    <h4>Three-hour Forecast</h4>
+    <h4>Today's Forecast</h4>
 
     foreach (var item in CityForecastInfo.Forecast.ForecastDay)
     {
         foreach (var hour in item.Hour)
         {
-            @if (DateTime.Parse(@hour.Time) > DateTime.Parse(@CityLocationInfo.Location.LocalTime) && DateTime.Parse(@hour.Time) < DateTime.Parse(@CityLocationInfo.Location.LocalTime).AddHours(3))
+            @if (DateTime.Parse(@hour.Time) > DateTime.Parse(@CityLocationInfo.Location.LocalTime) @*&& DateTime.Parse(@hour.Time) < DateTime.Parse(@CityLocationInfo.Location.LocalTime).AddHours(3)*@)
             {
-                <p>@hour.Time : @hour.Condition.Text <img height="50" src="@hour.Condition.Icon"/></p>
+                <p>@DateTime.Parse(@hour.Time).ToString("HH:mm") : @hour.Condition.Text <img height="50" src="@hour.Condition.Icon"/></p>
             }
         }
     }
