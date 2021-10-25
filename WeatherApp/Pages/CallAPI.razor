@@ -28,7 +28,7 @@
         {
             @if (DateTime.Parse(@hour.Time) > DateTime.Parse(@CityLocationInfo.Location.LocalTime) && DateTime.Parse(@hour.Time) < DateTime.Parse(@CityLocationInfo.Location.LocalTime).AddHours(3))
             {
-                <p>@hour.Time : @hour.Condition.Text</p>
+                <p>@hour.Time : @hour.Condition.Text <img height="50" src="@hour.Condition.Icon"/></p>
             }
         }
     }
